@@ -15,40 +15,32 @@ const { NotImplementedError } = require("../extensions/index.js");
 
 class Stack {
   constructor() {
-    this.array = [1, 2, 3, 4];
+    this.array = [];
   }
 
   push(item) {
-    let array = this.array;
-    array.push(item);
-    console.log(array);
-  }
-
-  pop() {
-    let array = this.array;
-    let arrayPop = array.pop();
-    for (let i = 0; i <= array.length; i++) {
-      if (array.length == 1) {
-        return 1;
-      } else if (array.length < 0) {
-        return 0;
-      }
-    }
-    console.log(array);
+    this.array.push(item);
+    console.log(this.array);
+    return this.array;
   }
 
   peek() {
-    let array = this.array;
-    let arrayPeek = array.slice(-1)[0];
+    let arrayPeek = this.array.slice(-1)[0];
     console.log(arrayPeek);
+    return arrayPeek;
+  }
+
+  pop() {
+    let arrayPop = this.array.pop();
+    console.log(this.array);
+    return arrayPop;
   }
 }
 
 const stack = new Stack();
-stack.push(7);
+stack.push(1);
 stack.pop();
 stack.peek();
-
 module.exports = {
   Stack,
 };
