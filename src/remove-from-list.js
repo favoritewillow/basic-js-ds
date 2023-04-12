@@ -23,6 +23,13 @@ const { NotImplementedError } = require("../extensions/index.js");
  * }
  */
 
+class ListNode {
+  constructor(l) {
+    this.value = l;
+    this.next = null;
+  }
+}
+
 function removeKFromList() {
   function filter(array, checkFn) {
     let returnNewArray = [];
@@ -40,6 +47,7 @@ function removeKFromList() {
   console.log(k);
 }
 
+const list = new ListNode();
 removeKFromList();
 module.exports = {
   removeKFromList,
