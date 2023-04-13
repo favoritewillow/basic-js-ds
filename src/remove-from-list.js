@@ -23,32 +23,207 @@ const { NotImplementedError } = require("../extensions/index.js");
  * }
  */
 
-class ListNode {
-  constructor(l) {
-    this.value = l;
+class Node {
+  constructor(value) {
+    this.value = value;
     this.next = null;
   }
 }
 
-function removeKFromList() {
-  function filter(array, checkFn) {
-    let returnNewArray = [];
-
-    for (let i = 0; i < array.length; i++) {
-      if (checkFn(array[i])) {
-        returnNewArray.push(array[i]);
-      }
-    }
-    return returnNewArray;
+function removeKFromList( k) {
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.length = 0;
   }
 
-  let l = [3, 1, 2, 3, 4, 5];
-  let k = filter(l, (item) => item !== 3);
-  console.log(k);
+  add(value) {
+    if (this.length === 0) {
+      this.head = new Node(value);
+    } else {
+      let current = this.head;
+
+      // move to the last node
+      while(current.next) {
+        current = current.next;
+      }
+
+      current.next = new Node(value);
+    }
+
+    this.length++;
+  }
+
+ /* insert(position, value) {
+    if (position < 0 || position > this.length) {
+      return false;
+    }
+
+    let node = new Node(value);
+
+    if (position === 0) {
+      node.next = this.head;
+      this.head = node;
+    } else {
+      let current = this.head;
+      let prev = null;
+
+      let index = 0;
+
+      while (index < position) {
+        prev = current;
+        current = current.next;
+        index++;
+      }
+
+      prev.next = node;
+      node.next = current;
+    }
+
+    this.length++;
+  }*/
+
+  /*get(position) {
+    if (position < 0 || this.length <= position ) {
+      return;
+    }
+
+    let current = this.head;
+    let index = 0;
+
+    while (index < position) {
+      current = current.next;
+      index++;
+    }
+
+    return current.value;
+  }*/
+
+  removeAt(position) {
+    
+    if (position < 0 || position >= this.length) {
+      return null;
+    }
+
+    let current = this.head;
+
+    if (position === 0) {
+      this.head = current.next;
+    } else {
+      let prev = null;
+      let index = 0;
+
+      while (index < position) {
+        prev = current;
+        current = current.next;
+        index++;
+      }
+
+      prev.next = current.next;
+    }
+
+    this.length--;
+    return current.value;
+  }
+
+  remove(element) {
+    this.removeAt( this.indexOf(element) );
+   
+  }
+
+  indexOf(element) {
+    let current = this.head;
+    let index = 0;
+
+    while (current) {
+      if (current.value === element) {
+        return index;
+        
+      }
+
+      current = current.next;
+      index++;
+      
+    }
+
+    return -1;
+    
+  }
+
+  /*size() {
+    return this.length;
+  }
+
+  isEmpty() {
+    return this.length === 0;
+  }*/
+
+  print() {
+    let current = this.head;
+
+    while(current) {
+      console.log(current.value);
+      current = current.next;
+    }
+  }
+  
 }
 
-const list = new ListNode();
-removeKFromList();
+console.log('s01e11 - Linked List');
+let list = new LinkedList ();
+let payload = 3;
+
+
+function addItems() {
+  console.log('\n  Add Items');
+
+  list.add( 3 );
+  list.add( 1 );
+  list.add( 2 );
+  list.add( 3 );
+  list.add( 4 );
+  list.add( 5 );
+  
+// list.insert(3, payload);
+
+// list.insert(0, 3);
+ // list.insert(3, 6);
+
+ list.print();
+}
+
+function getItems() {
+  console.log('\n  Get Items');
+
+//  console.log('get(3):', list.get(3));
+  
+  
+
+  console.log('indexOf {3}:', list.indexOf(3));
+ //console.log('indexOf payload:', list.indexOf(payload));
+}
+
+function removeItems() {
+  console.log('\n  Remove Items');
+
+  console.log('   Before:');
+  list.print();
+
+  list.remove(payload);
+
+  console.log('   After:');
+  list.print();
+}
+
+
+
+
+addItems();
+getItems();
+removeItems();
+}
+
+removeKFromList( "3");
 module.exports = {
   removeKFromList,
 };
